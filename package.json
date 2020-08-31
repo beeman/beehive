@@ -28,14 +28,26 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
+    "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "10.1.0",
     "@types/node": "~8.9.4",
     "dotenv": "6.2.0",
+    "eslint": "6.8.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.13",
+    "prettier": "2.0.4",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "eslint": "6.8.0",
-    "typescript": "~3.9.3",
-    "prettier": "2.0.4",
-    "@nrwl/nx-cloud": "latest"
+    "typescript": "~3.9.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,md,ts,html,graphql}": [
+      "yarn format --uncommitted"
+    ]
   }
 }
