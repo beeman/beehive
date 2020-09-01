@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@beehive/core": ["libs/core/src/index.ts"]
+      "@beehive/core": ["libs/core/src/index.ts"],
+      "@beehive/course": ["libs/course/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
