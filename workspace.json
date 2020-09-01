@@ -77,6 +77,30 @@
           }
         }
       }
+    },
+    "course": {
+      "root": "libs/course",
+      "sourceRoot": "libs/course/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/course/tsconfig.lib.json", "libs/course/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/course/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/course/jest.config.js",
+            "tsConfig": "libs/course/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
