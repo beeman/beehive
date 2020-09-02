@@ -23,7 +23,10 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "prisma:migrate": " npx prisma migrate save -n init -c --experimental && npx prisma migrate up -c --experimental",
+    "prisma:generate": "npx prisma generate",
+    "prisma:apply": "yarn prisma:migrate && yarn prisma:generate"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +35,7 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/graphql": "^7.6.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@prisma/client": "2.6.0",
     "apollo-server-express": "^2.17.0",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.1.0",
@@ -48,6 +52,7 @@
     "@nrwl/node": "10.1.0",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/workspace": "10.1.0",
+    "@prisma/cli": "2.6.0",
     "@types/jest": "26.0.8",
     "@types/node": "~8.9.4",
     "@typescript-eslint/eslint-plugin": "2.19.2",
