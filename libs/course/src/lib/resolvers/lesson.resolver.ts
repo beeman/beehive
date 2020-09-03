@@ -1,3 +1,5 @@
+import { GqlAuthGuard } from '@beehive/auth'
+import { UseGuards } from '@nestjs/common'
 import { Args, Mutation, Resolver } from '@nestjs/graphql'
 import { CourseService } from '../course.service'
 import { CreateLessonInput } from '../dto/create-lesson.input'
@@ -5,6 +7,7 @@ import { UpdateLessonInput } from '../dto/update-lesson.input'
 import { Lesson } from '../models/lesson'
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class LessonResolver {
   constructor(private readonly service: CourseService) {}
 

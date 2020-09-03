@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common'
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql'
+import { GqlAuthGuard } from '@beehive/auth'
 import { CourseService } from '../course.service'
 import { UpdateCourseInput } from '../dto/update-course.input'
 import { Course } from '../models/course'
@@ -18,16 +20,19 @@ export class CourseResolver {
     return this.service.course(id)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Course, { nullable: true })
   createCourse(@Args('input') input: CreateCourseInput) {
     return this.service.createCourse(input)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Course, { nullable: true })
   updateCourse(@Args('id') id: number, @Args('input') input: UpdateCourseInput) {
     return this.service.updateCourse(id, input)
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Boolean, { nullable: true })
   deleteCourse(@Args('id') id: number) {
     return this.service.deleteCourse(id)
