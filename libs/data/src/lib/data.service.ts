@@ -37,6 +37,14 @@ export class DataService extends PrismaClient implements OnModuleInit, OnModuleD
     })
   }
 
+  async findUserById(userId: number) {
+    return this.user.findOne({
+      where: {
+        id: userId,
+      },
+    })
+  }
+
   private async ensureAdminUser() {
     // Check if we have an admin
     const found = await this.findUserByEmail(this.defaultAdmin.email)
