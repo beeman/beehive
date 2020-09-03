@@ -14,7 +14,7 @@ export class CourseResolver {
   }
 
   @Query(() => Course, { nullable: true })
-  course(@Args('id') id: string) {
+  course(@Args('id') id: number) {
     return this.service.course(id)
   }
 
@@ -24,12 +24,12 @@ export class CourseResolver {
   }
 
   @Mutation(() => Course, { nullable: true })
-  updateCourse(@Args('id') id: string, @Args('input') input: UpdateCourseInput) {
+  updateCourse(@Args('id') id: number, @Args('input') input: UpdateCourseInput) {
     return this.service.updateCourse(id, input)
   }
 
   @Mutation(() => Boolean, { nullable: true })
-  deleteCourse(@Args('id') id: string) {
+  deleteCourse(@Args('id') id: number) {
     return this.service.deleteCourse(id)
   }
 }
