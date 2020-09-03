@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -20,11 +20,11 @@ model User {
 }
 
 model Course {
-  id          Int      @default(autoincrement()) @id
+  id          Int     @default(autoincrement()) @id
   title       String
   description String?
   imageUrl    String?
-  lessons     Lesson[]
+  // lessons     Lessons[]
 }
 
 model Lesson {
@@ -32,6 +32,6 @@ model Lesson {
   title       String
   description String?
   content     String?
-  course      Course  @relation(fields: [courseId], references: [id])
+  course      Course @relation(fields: [courseId], references: [id])
   courseId    Int
 }

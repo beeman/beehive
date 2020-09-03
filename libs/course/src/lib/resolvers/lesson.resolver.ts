@@ -9,21 +9,17 @@ export class LessonResolver {
   constructor(private readonly service: CourseService) {}
 
   @Mutation(() => Lesson, { nullable: true })
-  createLesson(@Args('courseId') courseId: string, @Args('input') input: CreateLessonInput) {
+  createLesson(@Args('courseId') courseId: number, @Args('input') input: CreateLessonInput) {
     return this.service.createLesson(courseId, input)
   }
 
   @Mutation(() => Lesson, { nullable: true })
-  updateLesson(
-    @Args('courseId') courseId: string,
-    @Args('lessonId') lessonId: string,
-    @Args('input') input: UpdateLessonInput,
-  ) {
-    return this.service.updateLesson(courseId, lessonId, input)
+  updateLesson(@Args('lessonId') lessonId: number, @Args('input') input: UpdateLessonInput) {
+    return this.service.updateLesson(lessonId, input)
   }
 
   @Mutation(() => Boolean, { nullable: true })
-  deleteLesson(@Args('courseId') courseId: string, @Args('lessonId') lessonId: string) {
-    return this.service.deleteLesson(courseId, lessonId)
+  deleteLesson(@Args('lessonId') lessonId: number) {
+    return this.service.deleteLesson(lessonId)
   }
 }

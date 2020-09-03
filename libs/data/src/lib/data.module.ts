@@ -4,6 +4,6 @@ import { DataService } from './data.service'
 @Module({
   controllers: [],
   providers: [DataService],
-  exports: [],
+  exports: [DataService],
 })
 export class DataModule {}
