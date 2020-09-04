@@ -1,3 +1,4 @@
+import { User } from '@beehive/auth'
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Lesson } from './lesson'
 
@@ -17,4 +18,7 @@ export class Course {
 
   @Field(() => [Lesson], { nullable: true })
   lessons?: Lesson[]
+
+  @Field({ nullable: true })
+  author?: User
 }

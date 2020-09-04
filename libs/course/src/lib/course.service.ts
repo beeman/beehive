@@ -7,15 +7,20 @@ import { UpdateLessonInput } from './dto/update-lesson.input'
 
 @Injectable()
 export class CourseService {
-  constructor(private readonly data: DataService) {}
+  private readonly courseIncludes = {
+    author: true,
+    lessons: true,
+  }
 
+  constructor(private readonly data: DataService) {}
   public courses() {
-    return this.data.course.findMany({ include: { lessons: true } })
+    return this.data.course.findMany({ include: this.courseIncludes })
   }
 
   public async course(id: number) {
     const found = await this.data.course.findOne({
       where: { id },
+      include: this.courseIncludes,
     })
     if (!found) {
       throw new NotFoundException(`Course with id ${id} not found!`)
@@ -23,13 +28,16 @@ export class CourseService {
     return found
   }
 
-  public createCourse(input: CreateCourseInput) {
+  public createCourse(userId: number, input: CreateCourseInput) {
     return this.data.course.create({
-      data: { ...input },
+      data: {
+        ...input,
+        author: { connect: { id: userId } },
+      },
     })
   }
 
-  public async updateCourse(id: number, input: UpdateCourseInput) {
+  public async updateCourse(userId: number, id: number, input: UpdateCourseInput) {
     const course = await this.course(id)
 
     return this.data.course.update({
@@ -38,7 +46,7 @@ export class CourseService {
     })
   }
 
-  public async deleteCourse(id: number) {
+  public async deleteCourse(userId: number, id: number) {
     const deleted = await this.data.course.delete({
       where: {
         id,
@@ -47,7 +55,7 @@ export class CourseService {
     return !!deleted
   }
 
-  public async createLesson(courseId: number, input: CreateLessonInput) {
+  public async createLesson(userId: number, courseId: number, input: CreateLessonInput) {
     const course = await this.course(courseId)
 
     return this.data.lesson.create({
@@ -60,14 +68,15 @@ export class CourseService {
     })
   }
 
-  public updateLesson(lessonId: number, input: UpdateLessonInput) {
+  public updateLesson(userId: number, lessonId: number, input: UpdateLessonInput) {
     return this.data.lesson.update({
       where: { id: lessonId },
       data: { ...input },
     })
   }
 
-  public async deleteLesson(lessonId: number) {
+  public async deleteLesson(userId: number, lessonId: number) {
+    // TODO: Check if userId can actually delete this?
     const deleted = await this.data.lesson.delete({ where: { id: lessonId } })
 
     return !!deleted

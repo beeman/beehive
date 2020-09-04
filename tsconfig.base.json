@@ -18,7 +18,8 @@
     "paths": {
       "@beehive/core": ["libs/core/src/index.ts"],
       "@beehive/course": ["libs/course/src/index.ts"],
-      "@beehive/data": ["libs/data/src/index.ts"]
+      "@beehive/data": ["libs/data/src/index.ts"],
+      "@beehive/auth": ["libs/auth/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
